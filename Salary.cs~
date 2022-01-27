@@ -1,0 +1,226 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+
+namespace PaySlip
+{
+class Program
+{
+static void Main(string[] args)
+{
+
+}//closed main
+}//closed program
+
+
+class Staff
+{
+private float hourlyRate;
+private int hWorked; //(backing field for HoursWorked)
+
+public float TotalPay{ get; protected set;}
+public float BasicPay{ get; private set;}
+public string NameOfStaff{ get; private set;}
+public int HoursWorked{ get; private set;}
+
+
+public Staff(string name, float rate)
+{
+NameOfStaff=name;
+hourlyRate=rate;
+Console.WriteLine("Name: {0}\nRate: {1}",name, rate);
+}//closed constructor
+
+public virtual void CalculatePay()
+{
+Console.WriteLine("Calculating Pay...");
+BasicPay = hourlyRate*hWorked;
+TotalPay = BasicPay;
+}//close method
+
+public override string ToString()
+{
+return "\nName:"+NameOfStaff+" Rate: "+hourlyRate+" Total: "+TotalPay+".";
+}//closed method
+
+}//closed Class
+
+
+class Manager:Staff
+{
+private const float managerHourlyRate = 50.00f;
+public int Allowance{get; private set;}
+
+public Manager(string name) : base(name, managerHourlyRate)
+{
+Console.WriteLine("Name = {0}", name);
+}
+public override void CalculatePay()
+{
+base.CalculatePay();
+Allowance = 1000;
+if (HoursWorked > 160)
+{
+Console.WriteLine("\n{0} ",TotalPay+Allowance);
+}else{
+Console.WriteLine("\n{0} ",TotalPay);
+}
+}// closed method
+
+//public override string ToString()
+}
+
+
+class Admin:Staff
+{
+private const float overtimeRate = 15.5f;
+private const int adminHourlyRate = 30;
+public float Overtime { get; private set; }
+public Admin(string name):base(name, adminHourlyRate)
+{
+Console.WriteLine("Name = {0}", name);
+}
+public override void CalculatePay(){
+base.CalculatePay();
+if (HoursWorked>60){
+float overtime = overtimeRate * (HoursWorked - 160);
+Console.WriteLine("\n{0}", TotalPay + overtime);
+}else{
+Console.WriteLine("\n{0} ",TotalPay);
+}//closed if-else
+}//closed constructor
+}//closed class
+
+
+class FileReader
+{
+List<Staff> myStaff = new List<Staff>();
+string[] result = new string[2];
+string path = "staff.txt";
+string[] separator = {","};
+
+
+
+//Console.WriteLine("Enter File Path");
+//path = Console.ReadLine();
+
+public List<Staff> ReadFile(){
+if (File.Exists(path)){
+using(StreamReader sr = new StreamReader(path))
+{
+while(!sr.EndOfStream){
+result = sr.ReadLine().Split(separator, StringSplitOptions.None);
+if (result[1].GetType() == typeof(Manager))
+{
+//string name = result[0];
+myStaff.Add(new Manager(result[0])); //creates new Manager obj and adds to list myStaff
+}
+else if (result[1].GetType() == typeof(Admin))//creates new Admin obj and adds to list myStaff
+{
+//string name1 = result[0];
+myStaff.Add(new Admin(result[0]));
+}else
+{
+Console.WriteLine("Error");
+}
+}
+sr.Close();
+}}else{
+Console.WriteLine("File Not Found.");
+}
+return myStaff;
+}//closed method
+}//closed class
+
+
+class PaySlipClass
+{
+private int month;
+private int year;
+enum MonthsOfYear
+{
+JAN, FEB, MAR, APR, MAY, JUNE, JULY, AUG, SEP, OCT, NOV, DEC
+}
+
+public PaySlipClass (int monthOfPay, int yearOfPay)
+{
+month = monthOfPay;
+year = yearOfPay;
+}//close constructor
+
+public void GeneratePaySlip(List<Staff>myStaff)
+{
+string path;
+
+foreach (Staff f in myStaff)
+{
+path = f.NameOfStaff;
+path = path + ".txt";
+
+using(StreamWriter sw = new StreamWriter(path))
+{
+sw.WriteLine("\n");
+sw.WriteLine("PAYSLIP FOR {0} {1}", (MonthsOfYear)month, year);
+sw.WriteLine("==============================================");
+sw.WriteLine("Name of Staff: {0}", f.NameOfStaff);
+sw.WriteLine("Hours Worked: {0}", f.HoursWorked);
+sw.WriteLine("");
+sw.WriteLine("BasicPay: {0:C}", f.BasicPay);
+
+if (f.GetType() == typeof(Manager))
+{
+sw.WriteLine("");
+sw.WriteLine("Allowance: {0:C}", ((Manager)f).Allowance);
+}//close if
+else if (f.GetType() == typeof(Admin))
+{
+sw.WriteLine("");
+sw.WriteLine("Overtime: {0:C}", ((Admin)f).Overtime);
+}else
+{
+Console.WriteLine("Error1");
+}//close else
+
+sw.WriteLine("");
+sw.WriteLine("==============================================");
+sw.WriteLine("TotalPay: {0:C}", f.TotalPay);
+sw.WriteLine("==============================================");
+sw.Close();
+}// close sw
+
+}//close loop
+
+}//close method
+
+public void GenerateSummary(List<Staff>mystaffs)
+{
+var result =
+          from cust in mystaffs
+          where cust.HoursWorked < 10
+          orderby cust.NameOfStaff ascending
+          select new { cust.NameOfStaff, cust.HoursWorked };
+
+
+string path = "summary.txt";
+
+using(StreamWriter sw = new StreamWriter(path))
+{
+sw.WriteLine("Staff with less than 10 working hours\n");
+//foreach(var staff in result)
+//{
+//sw.WriteLine("Name of Staff: {0}, Hours Worked: {1}", staff.NameOfStaff, staff.HoursWorked);
+//}
+// close loop
+
+sw.Close;
+
+}//close streamreader
+
+}//close method
+}//close class
+
+}

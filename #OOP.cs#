@@ -1,0 +1,324 @@
+using System;
+using System.Linq;
+using System.Text;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace ClassDemo{
+          //A Simple Program to display oop
+	  class Staff
+	  {
+	  private string nameOfStaff;
+	  private const int hourlyRate = 30;
+	  private int hWorked;
+	  public int HoursWorked
+	  {
+	  get
+	  {
+	  return hWorked;
+	  } //closed get
+	  set
+	  {
+	  if (value > 0)
+	       hWorked = value;
+	  else
+	      hWorked = 0;
+	  } //closed set
+	  } //closed HoursWorked
+	  public void PrintMessage()
+	  {
+	  Console.WriteLine("Calculating Pay…");
+	  } //closed PrintMessage
+ 	  public int CalculatePay()
+	  {
+	  PrintMessage();
+	  int staffPay;
+	  staffPay = hWorked * hourlyRate ;
+	  if (hWorked >0)
+	  return staffPay;
+	  else
+	  return 0;
+	  } //closed CalculatePay
+	  public int CalculatePay(int bonus, int allowance)
+	  {
+	  PrintMessage();
+	  if (hWorked > 0)
+	  
+	  return hWorked * hourlyRate + bonus + allowance;
+	  else
+	  return 0;
+	  } //closed CalcPay
+	  public override string ToString()
+	  {
+	  return "Name of Staff = " + nameOfStaff + ", hourlyRate = " + hourlyRate + ", hWorked = " + hWorked;
+	  } //closed ToString
+	  public Staff(string name)
+	  {
+	  nameOfStaff = name;
+	  Console.WriteLine("\n" + nameOfStaff);
+	  Console.WriteLine("--------------------------");
+	  } //closed Staff
+	  public Staff(string firstName, string lastName)
+	  {
+	  nameOfStaff = firstName + " " + lastName;
+	  Console.WriteLine("\n" + nameOfStaff);
+	  Console.WriteLine("--------------------------");
+	  
+	  } //closed Staff1
+	  } //closed Staff Class
+
+
+	  class MyClass
+	  {
+	      //Non static members
+	      public string message = "\nHello World";
+	      
+	      public string Name { get; set; } //closed property Name
+	      
+	      public void DisplayName()
+	      {
+	           Console.WriteLine("Name = {0}", Name);
+	      } //closed method DisplayName
+	      
+	      public void PrintFirstElement(int[] a)
+	      {
+	      Console.WriteLine("The first element is {0}.\n", a[0]);
+	      } //closed method PrintFirstElement
+	      
+	      public void PrintFirstListElement(List<int> a)
+	      {
+	      Console.WriteLine("The first list element is {0}.\n", a[0]);
+	      } //closed method PrintFirstListElement
+	      
+	      
+	      //Static members
+	      public static string greetings = "Good morning";
+	      public static int Age { get; set; } //closed ppt
+	      public static void DisplayAge()
+	      {
+	           Console.WriteLine("Age = {0}", Age);
+	      } //closed method DisplayAge1
+	   } //closed class
+
+
+	  static class MyStaticClass
+	  {
+	  private static int[] a = new int[3];
+	  private static int B{get; set;} //closed ppt
+
+	  // array method
+	  public static int[] ReturnUserInput()
+	  {
+	  for (int i = 0; i < a.Length; i++)
+	  {
+	  Console.Write("Enter an integer: ");
+	  a[i] = Convert.ToInt32(Console.ReadLine());
+	  Console.WriteLine("Integer added to array.\n");
+	  }
+	  return a;
+	  }//closed method ReturnUserInput
+
+	  //list method
+	  public static List<int> ReturnUserInputList()
+	  {
+	  List<int> a = new List<int>();
+	  int input;
+
+	  for (int i = 0; i < 3; i++)
+	  {
+	  Console.Write("Enter an integer: ");
+	  input = Convert.ToInt32(Console.ReadLine());
+	  Console.WriteLine("Integer added to list.\n");
+	  a.Add(input);
+	  }
+	  return a;
+	  } //closed method ReturnUserInputList
+
+	  //using params
+	  public static void PrintNames(params string[] names)
+	  {
+	  for (int i = 0; i < names.Length; i++)
+	  {
+	  Console.Write(names[i] + " ");
+	  }
+	  Console.WriteLine();
+	  } //closed method PrintNames
+	  } //closed class
+
+	  class MethodDemo
+	  {
+	  public void PassByValue(int a)
+	  {
+	  a = 10;
+	  Console.WriteLine("a inside method = {0}", a);
+	  }//closed method
+	   
+	  public void PassByReference(int[] b)
+	  {
+	  b[0] = 5;
+	  Console.WriteLine("b[0] inside method = {0}", b[0]);
+	  } //closed method
+	  } //closed class
+
+	  
+	  class Member
+	  {
+	  protected int annualFee;
+	  private string name;
+	  private int memberID;
+	  private int memberSince;
+
+	  public override string ToString()
+	  {
+		string word = "";
+		word = "\nName: " + name + "\nMember ID: " + memberID + "\nMember Since: " + memberSince + "\nTotal Annual Fee: " + annualFee;
+		return word;
+	  } //closed method
+
+	  public Member()
+	  {
+	  Console.WriteLine("Parent Constructor with no parameter");
+	  } //closed method
+	  
+	  public Member(string pName, int pMemberID, int pMemberSince)
+	  {
+	  Console.WriteLine("Parent Constructor with 3 parameters");
+	  	  
+	  name = pName;
+	  memberID = pMemberID;
+	  memberSince = pMemberSince;
+	  } //closed method
+
+	  public virtual void CalculateAnnualFee()
+	  {
+	  annualFee = 0;
+	  } //closed method
+	  }//closed class
+	  
+	  class NormalMember : Member
+	  {
+	  public NormalMember()
+	  {
+	  Console.WriteLine("Child constructor with no parameter");
+	  } //closed method
+	  public NormalMember(string remarks, string name, int memberID, int memberSince) : base (name, memberID, memberSince)
+	  {
+	  Console.WriteLine("Child Constructor with 4 parameters");
+	  Console.WriteLine("Remarks = {0}", remarks);
+	  } //closed method
+
+	  public override void CalculateAnnualFee()
+	  {
+	  annualFee = 100 + 12*30;
+	  } //closed method
+	  }//closed class
+
+
+	  class VIPMember : Member
+	  {
+	  public VIPMember(string name, int memberID, int memberSince) : base (name, memberID, memberSince)
+	  {
+	  Console.WriteLine("Child Constructor with 3 parameters");
+	  } //closed method
+	  
+	  public override void CalculateAnnualFee()
+	  {
+	  annualFee = 1200;
+	  } //closed method
+	  }//closed class
+	  
+
+          class Program{
+                static void Main(string[] args){
+		
+		int pay;
+		
+		// 1st object of staff class
+		Staff staff1 = new Staff("Peter");
+		staff1.HoursWorked = 160;
+		pay = staff1.CalculatePay(1000, 400);
+		Console.WriteLine("Pay = {0}", pay);
+
+		// 2nd object of staff class
+		Staff staff2 = new Staff("Jane", "Lee");
+		staff2.HoursWorked = 160;
+		pay = staff2.CalculatePay();
+		Console.WriteLine("Pay = {0}", pay);
+
+		// 3rd object of staff class
+		Staff staff3 = new Staff("Carol");
+		staff3.HoursWorked = -10;
+		pay = staff3.CalculatePay();
+		Console.WriteLine("Pay = {0}", pay);
+
+		// MyClass object
+		MyClass classA = new MyClass();
+		Console.WriteLine(classA.message);
+		classA.Name = "Jamie";
+		classA.DisplayName();
+
+		// MyClass object static methods and properties
+		Console.Write(MyClass.greetings +"\nEnter Age: ");
+		int age = Convert.ToInt32(Console.ReadLine());
+		MyClass.Age = age;
+		MyClass.DisplayAge();
+
+		int[] myArray = MyStaticClass.ReturnUserInput();
+		classA.PrintFirstElement(myArray);
+
+		List<int> myList = MyStaticClass.ReturnUserInputList();
+		classA.PrintFirstListElement(myList);
+		
+		Console.Write("Enter a name :");
+		
+		string name = Console.ReadLine();
+		string[] seperator = {","," "};
+		string[] names = name.Split(seperator, StringSplitOptions.None);
+		MyStaticClass.PrintNames(names);
+		MyStaticClass.PrintNames("Yvonne", "Jamie");
+		MyStaticClass.PrintNames("Abigail", "Betty", "Carol", "David");
+
+
+		int a = 2;
+		int[] b = { 1, 2, 3 };
+		MethodDemo obj = new MethodDemo();
+		 
+		Console.WriteLine("a before = {0}", a);
+		obj.PassByValue(a);
+		Console.WriteLine("a after = {0}", a);
+		 
+		Console.WriteLine("\n\n");
+		 
+		Console.WriteLine("b[0] before = {0}", b[0]);		obj.PassByReference(b)
+		;
+		Console.WriteLine("b[0] after = {0}", b[0]);
+
+		//NormalMember myChildMember = new NormalMember("Special Rate", "James", 1, 2010);
+		
+		//NormalMember mem1 = new NormalMember("Special Rate", "James", 1, 2010);
+		//VIPMember mem2 = new VIPMember("Andy", 2, 2011);
+		//mem1.CalculateAnnualFee();
+		//mem2.CalculateAnnualFee();
+
+		//Console.WriteLine(mem1.ToString());
+		//Console.WriteLine(mem2.ToString());
+
+		Member[] clubMembers = new Member[5];
+
+		clubMembers[0] = new NormalMember("Special Rate", "James", 1, 2010);
+		clubMembers[1] = new NormalMember("Normal Rate", "Andy", 2, 2011);
+		clubMembers[2] = new NormalMember("Normal Rate", "Bill", 3, 2011);
+		clubMembers[3] = new VIPMember("Carol", 4, 2012);
+		clubMembers[4] = new VIPMember("Evelyn", 5, 2012);
+		foreach (Member m in clubMembers)
+		{
+		m.CalculateAnnualFee();
+		Console.WriteLine(m.ToString());
+		}
+		string[] hello = new string[2];
+		hello[0] = "birds";
+		Console.WriteLine(hello[0]);
+		} //closed Main
+		} //closed Program Class
+	} //closed Namespace Class
