@@ -1,14 +1,14 @@
 
 
-PAYSLIP FOR FEB 2020
+PAYSLIP FOR FEB 2022
 ==============================================
 Name of Staff: Victor
-Hours Worked: 190
+Hours Worked: 120
 
-BasicPay: $5,700.00
+BasicPay: $3,600.00
 
 Overtime: $0.00
 
 ==============================================
-TotalPay: $5,700.00
+TotalPay: $3,600.00
 ==============================================

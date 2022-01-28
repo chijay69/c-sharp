@@ -1,14 +1,14 @@
 
 
-PAYSLIP FOR FEB 2020
+PAYSLIP FOR FEB 2022
 ==============================================
 Name of Staff: Peter
-Hours Worked: 60
+Hours Worked: 50
 
-BasicPay: $3,000.00
+BasicPay: $2,500.00
 
 Allowance: $1,000.00
 
 ==============================================
-TotalPay: $3,000.00
+TotalPay: $2,500.00
 ==============================================

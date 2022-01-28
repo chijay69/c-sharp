@@ -1,14 +1,14 @@
 
 
-PAYSLIP FOR FEB 2020
+PAYSLIP FOR FEB 2022
 ==============================================
 Name of Staff: Carol
-Hours Worked: 55
+Hours Worked: 78
 
-BasicPay: $1,650.00
+BasicPay: $2,340.00
 
 Overtime: $0.00
 
 ==============================================
-TotalPay: $1,650.00
+TotalPay: $2,340.00
 ==============================================

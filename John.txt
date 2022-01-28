@@ -1,14 +1,14 @@
 
 
-PAYSLIP FOR FEB 2020
+PAYSLIP FOR FEB 2022
 ==============================================
 Name of Staff: John
-Hours Worked: 20
+Hours Worked: 180
 
-BasicPay: $600.00
+BasicPay: $5,400.00
 
 Overtime: $0.00
 
 ==============================================
-TotalPay: $600.00
+TotalPay: $5,400.00
 ==============================================

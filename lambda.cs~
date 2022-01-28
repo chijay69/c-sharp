@@ -1,0 +1,33 @@
+using System;
+using System.IO;
+using System.Text;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+
+
+namespace LambdaExpression {
+class Program {
+      static void Mainc(string[] args)
+      {
+	//list to store numbers
+	List <int> numbers = new List <int> () {36, 71, 12, 15, 29, 18, 27, 17, 9, 34};
+	//foreach loop to display list items
+	foreach(var item in numbers)
+	{
+		Console.WriteLine("{0}", item);
+	}
+	Console.WriteLine();
+	//using lambda to cqlculate the square of each item in list
+	var numbersSquare = lambda.Select(x => x*x);
+	Console.Write("Squares: ");
+	foreach(var value in numbersSquare)
+	{
+		Console.Write("{0}, ",value );
+	}
+	Console.WriteLine();
+	// Using Lambda expression to find all numbers divisible by 3
+	numbersDivisibleBy3 = lambda.Select(x=>if (x%3 = 0));
+      }
+}
+}
